@@ -1,0 +1,11 @@
+= provide :title, 'Add New Feed'
+%div.row
+  %div.col-md-6.col-md-offset-3
+    = form_for @feed do |x|
+      =x.label :title
+      =x.text_field :title
+
+      =x.label :url
+      =x.text_field :url
+
+      =x.submit "Save"

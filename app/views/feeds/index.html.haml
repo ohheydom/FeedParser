@@ -1,0 +1,10 @@
+- @feed.each do |x, y|
+  %h1{id: "toggle-#{x}" }= x
+  - if y.respond_to?(:entries)
+    - y.entries.each do |post|
+      = link_to post.title, post.url
+      = simple_format post.summary
+  - else
+    %h3
+      This seems to be a bad feed.
+      = link_to 'Remove?', '#'
