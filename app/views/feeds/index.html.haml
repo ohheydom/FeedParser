@@ -1,10 +1,18 @@
-- @feed.each do |x, y|
-  %h1{id: "toggle-#{x}" }= @database_feeds.index(x)
-  - if y.respond_to?(:entries)
-    - y.entries.each do |post|
-      = link_to(post.title, post.url) + " - #{post.published.strftime('%B %d, %Y at %I:%M %P')}"
-      = simple_format post.summary
-  - else
-    %h3
-      This seems to be a bad feed.
-      = link_to 'Remove?', feed_path(find_id_by_url(x)), method: :delete
+%div.save_order
+  = button_to "Save Order", update_feed_order_path, id: 'save_order_button', remote: true
+
+%div#sortable
+  - @feed.each do |x, y|
+    %div{id: "sortable-#{@all_feeds.find_by(url: x).feed_order}"}
+      %h1{id: "toggle-#{x.parameterize}" }
+        = @all_feeds.find_by(url: x).title
+        = link_to "Collapse", "#", id: "collapse-#{x.parameterize}"
+      - if y.respond_to?(:entries)
+        %div{id: "content-#{x.parameterize}"}
+          - y.entries.each do |post|
+            = link_to(post.title, post.url) + " - #{post.published.strftime('%B %d, %Y at %I:%M %P')}"
+            = simple_format post.summary
+      - else
+        %h3
+          This seems to be a bad feed.
+          = link_to 'Remove?', feed_path(find_id_by_url(x)), method: :delete

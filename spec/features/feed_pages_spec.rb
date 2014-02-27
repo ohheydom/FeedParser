@@ -21,7 +21,11 @@ describe "Feed Pages" do
           expect { click_link 'Remove?'}.to change(Feed, :count).by(-1)
         end
       end
+    end
 
+    describe "Features" do
+      before { visit feeds_path }
+      it { should have_button 'Save Order' }
     end
   end
 

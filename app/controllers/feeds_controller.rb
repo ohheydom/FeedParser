@@ -1,9 +1,12 @@
 class FeedsController < ApplicationController
 
   def index
-    @database_feeds = Hash[Feed.order(feed_order: :asc).pluck(:title, :url)]
-    @feed = Feedzirra::Feed.fetch_and_parse(@database_feeds.values)
+    @all_feeds = Feed.order(feed_order: :asc)
+    @feed = Feedzirra::Feed.fetch_and_parse(@all_feeds.map(&:url))
 
+  end
+  
+  def update_feed_order
   end
 
   def show

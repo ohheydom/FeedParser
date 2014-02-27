@@ -1,6 +1,7 @@
 MetsFeed::Application.routes.draw do
   resources :feeds
   root 'feeds#index'
+  post 'update_feed_order', to: 'feeds#update_feed_order', as: :update_feed_order
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
