@@ -1,10 +1,9 @@
 class Feed < ActiveRecord::Base
-  before_save :feed_order
-  before_create :invalid_url_test
+  before_create :invalid_url_test, :set_feed_order
 
 
-  def feed_order
-    self.feed_order = self.id
+  def set_feed_order
+    self.feed_order = Feed.count == 0 ? 1 : (Feed.all.pluck(:feed_order).max + 1)
   end
 
   def invalid_url_test

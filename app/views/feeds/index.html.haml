@@ -1,10 +1,10 @@
 - @feed.each do |x, y|
-  %h1{id: "toggle-#{x}" }= x
+  %h1{id: "toggle-#{x}" }= @database_feeds.index(x)
   - if y.respond_to?(:entries)
     - y.entries.each do |post|
-      = link_to post.title, post.url
+      = link_to(post.title, post.url) + " - #{post.published.strftime('%B %d, %Y at %I:%M %P')}"
       = simple_format post.summary
   - else
     %h3
       This seems to be a bad feed.
-      = link_to 'Remove?', '#'
+      = link_to 'Remove?', feed_path(find_id_by_url(x)), method: :delete

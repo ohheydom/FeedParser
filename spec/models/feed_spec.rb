@@ -1,15 +1,16 @@
 require 'spec_helper'
 
 describe Feed do
-  let(:new_feed) { FactoryGirl.create(:feed) }
-  let(:new_feed_two) { FactoryGirl.create(:feed, title: 'testing12') }
-  subject { new_feed }
+
   it { should respond_to :feed_order }
 
   describe "feed_order" do
-    it "creates a feed order equal to the integer" do
-      expect(new_feed.feed_order).to eq(new_feed.id)
-      expect(new_feed_two.feed_order).to eq(new_feed_two.id)
+    let(:new_feed) { FactoryGirl.create(:feed) }
+    let(:new_feed_two) { FactoryGirl.create(:feed, title: 'testing12') }
+
+    it "increments feed_order by highest feed_order" do
+      expect(new_feed.feed_order).to eq(1)
+      expect(new_feed_two.feed_order).to eq(new_feed.feed_order+1)
     end
   end
 

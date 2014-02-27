@@ -1,10 +1,8 @@
 class FeedsController < ApplicationController
 
   def index
-    feeds = ['http://www.metsblog.com/feed', 'http://amazinavenue.com/rss/current']
-    feeds << 'http://www.gsdfsdfsdffsdfsdoogle.com'
-    @feed = Feedzirra::Feed.fetch_and_parse(feeds)
-    @entries = @feed.entries
+    @database_feeds = Hash[Feed.order(feed_order: :asc).pluck(:title, :url)]
+    @feed = Feedzirra::Feed.fetch_and_parse(@database_feeds.values)
 
   end
 
@@ -36,6 +34,8 @@ class FeedsController < ApplicationController
   end
 
   def destroy
+    @feed = Feed.find(params[:id]).destroy
+    redirect_to root_url
 
   end
 
