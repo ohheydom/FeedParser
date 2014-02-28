@@ -1,12 +1,16 @@
 class FeedsController < ApplicationController
 
   def index
-    @all_feeds = Feed.order(feed_order: :asc)
+    @all_feeds = Feed.all.order(:feed_order)
     @feed = Feedzirra::Feed.fetch_and_parse(@all_feeds.map(&:url))
-
   end
   
   def update_feed_order
+    new_sort_order = params[:sort_order].map! {|num| num[/\d+-\d+/].split("-").map(&:to_i) }
+
+    new_sort_order.each_with_index do |arr,ind|      
+      Feed.find(arr[0]).update_column(:feed_order, ind+1)
+    end
   end
 
   def show

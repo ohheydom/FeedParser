@@ -11,11 +11,9 @@ $(document).ready(function(){
     $.ajax({
       url: '/update_feed_order',
       type: 'POST',
-      data: {sort_order:
-      JSON.parse('{"' + decodeURI(sortable_params.replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')},
+      data: {sort_order: $('#sortable').sortable( "toArray" )},
       dataType: 'json'});
-
-    alert(sortable_params);
+    event.preventDefault();
   });
 
 });

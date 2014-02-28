@@ -1,9 +1,9 @@
 %div.save_order
-  = button_to "Save Order", update_feed_order_path, id: 'save_order_button', remote: true
+  = button_to "Save Order", update_feed_order_path, id: 'save_order_button'
 
 %div#sortable
-  - @feed.each do |x, y|
-    %div{id: "sortable-#{@all_feeds.find_by(url: x).feed_order}"}
+  - @feed.sort_by {|x| x.length}.each do |x, y|
+    %div{id: "sortable-#{@all_feeds.find_by(url: x).id}-#{@all_feeds.find_by(url: x).feed_order}"}
       %h1{id: "toggle-#{x.parameterize}" }
         = @all_feeds.find_by(url: x).title
         = link_to "Collapse", "#", id: "collapse-#{x.parameterize}"
