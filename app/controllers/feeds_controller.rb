@@ -2,7 +2,8 @@ class FeedsController < ApplicationController
 
   def index
     @all_feeds = Feed.all.order(:feed_order)
-    @feed_arr = @all_feeds.pluck(:feed_order, :url).sort_by {|x| x[0] }
+    @feed_arr = @all_feeds.map{|feed| [feed[:feed_order], feed[:url], feed[:id], feed[:title]] }
+                .sort_by {|x| x[0] }
     @feed = Feedzirra::Feed.fetch_and_parse(@all_feeds.map(&:url))
   end
   

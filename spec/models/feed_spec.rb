@@ -6,7 +6,7 @@ describe Feed do
 
   describe "feed_order" do
     let(:new_feed) { FactoryGirl.create(:feed) }
-    let(:new_feed_two) { FactoryGirl.create(:feed, title: 'testing12') }
+    let(:new_feed_two) { FactoryGirl.create(:feed, title: 'testing12', url: 'http://www.google.com') }
 
     it "increments feed_order by highest feed_order" do
       expect(new_feed.feed_order).to eq(1)

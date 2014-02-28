@@ -3,9 +3,9 @@
 
 %div#sortable
   - @feed_arr.each do |x|
-    %div{id: "sortable-#{@all_feeds.find_by(url: x[1]).id}-#{@all_feeds.find_by(url: x[1]).feed_order}"}
+    %div{id: "sortable-#{x[2]}-#{x[0]}"}
       %h1{id: "toggle-#{x[1].parameterize}" }
-        = @all_feeds.find_by(url: x[1]).title
+        = x[3]
         = link_to "Collapse", "#", id: "collapse-#{x[1].parameterize}"
       - if @feed[x[1]].respond_to?(:entries)
         %div{id: "content-#{x[1].parameterize}"}
@@ -15,4 +15,4 @@
       - else
         %h3
           This seems to be a bad feed.
-          = link_to 'Remove?', feed_path(find_id_by_url(x)), method: :delete
+          = link_to 'Remove?', feed_path(x[2]), method: :delete
