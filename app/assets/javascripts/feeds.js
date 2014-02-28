@@ -1,12 +1,20 @@
-$(document).ready(function(){
-  $('#sortable').sortable( { axis: 'y' });
-  $('#sortable').disableSelection();
+var pageEvents = function(){
+  var changed = false
+
   $("a[id*=collapse]").click(function(event) {
     content = event.target.id.replace('collapse-','');
-    $("#content-" + content).toggle();
-    $("#toggle-" + content + " a").toggleClass("sortable_collapse");
+    
+    if (changed == false) {
+      $("#content-" + content).toggle();
+      $("#toggle-" + content + " a").toggleClass("sortable_collapse");
+    }
+    
     event.preventDefault();
+    changed = false;
   });
+
+  $('#sortable').sortable( { axis: 'y', sort: function( event, ui ) { changed = true; }}).disableSelection();
+
   $('#save_order_button').click(function(event) {
     var sortable_params = $('#sortable').sortable( "serialize", {key: "sortable" });
     $.ajax({
@@ -17,4 +25,6 @@ $(document).ready(function(){
     event.preventDefault();
   });
 
-});
+};
+$(document).ready(pageEvents);
+$(document).on('page:load', pageEvents);

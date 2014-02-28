@@ -1,6 +1,6 @@
-%header.navbar.navbar-inverse
-  %div.navbar-inner
-    %div.container
-      %nav
-        = link_to 'Feeds', root_path
-        = link_to 'Add New Feed', new_feed_path
+%header.navbar.navbar-default
+  %div.container-fluid
+    %div.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li.active= link_to 'Feeds', root_path
+        %li.inactive= link_to 'Add New Feed', new_feed_path

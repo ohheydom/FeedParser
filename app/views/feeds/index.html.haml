@@ -12,6 +12,6 @@
             = link_to(post.title, post.url, class: bold_if_new(post.published.localtime)) + " - #{post.published.localtime.strftime('%B %d, %Y at %I:%M %P')}"
             = simple_format post.summary
       - else
-        %h3
+        %div{id: "content-#{x[1].parameterize}", class: 'content_hidden' }
           This seems to be a bad feed.
           = link_to 'Remove?', feed_path(x[2]), method: :delete
