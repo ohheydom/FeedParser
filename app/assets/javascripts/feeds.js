@@ -4,6 +4,7 @@ $(document).ready(function(){
   $("a[id*=collapse]").click(function(event) {
     content = event.target.id.replace('collapse-','');
     $("#content-" + content).toggle();
+    $("#toggle-" + content + " a").toggleClass("sortable_collapse");
     event.preventDefault();
   });
   $('#save_order_button').click(function(event) {

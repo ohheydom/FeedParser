@@ -1,4 +1,5 @@
 class FeedsController < ApplicationController
+  after_action :set_time_cookie, only: [:index]
 
   def index
     @all_feeds = Feed.all.order(:feed_order)
@@ -24,6 +25,9 @@ class FeedsController < ApplicationController
     @feed = Feed.new
   end
 
+  def set_time_cookie
+    cookies.permanent[:last_viewed] = Time.now
+  end
   def create
     @feed = Feed.new(feed_params)
     respond_to do |format|
