@@ -2,15 +2,17 @@ class FeedsController < ApplicationController
 
   def index
     @all_feeds = Feed.all.order(:feed_order)
+    @feed_arr = @all_feeds.pluck(:feed_order, :url).sort_by {|x| x[0] }
     @feed = Feedzirra::Feed.fetch_and_parse(@all_feeds.map(&:url))
   end
   
   def update_feed_order
     new_sort_order = params[:sort_order].map! {|num| num[/\d+-\d+/].split("-").map(&:to_i) }
+    whenstring = "feed_order = CASE id"
+    new_sort_order.each_with_index { |arr, ind| whenstring << " WHEN #{arr[0]} THEN #{ind+1}" }
+    whenstring << " END"
 
-    new_sort_order.each_with_index do |arr,ind|      
-      Feed.find(arr[0]).update_column(:feed_order, ind+1)
-    end
+    Feed.where(id: new_sort_order.map { |arr| arr[0] }).update_all(whenstring)
   end
 
   def show

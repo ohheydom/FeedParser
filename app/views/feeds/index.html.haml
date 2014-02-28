@@ -2,14 +2,14 @@
   = button_to "Save Order", update_feed_order_path, id: 'save_order_button'
 
 %div#sortable
-  - @feed.sort_by {|x| x.length}.each do |x, y|
-    %div{id: "sortable-#{@all_feeds.find_by(url: x).id}-#{@all_feeds.find_by(url: x).feed_order}"}
-      %h1{id: "toggle-#{x.parameterize}" }
-        = @all_feeds.find_by(url: x).title
-        = link_to "Collapse", "#", id: "collapse-#{x.parameterize}"
-      - if y.respond_to?(:entries)
-        %div{id: "content-#{x.parameterize}"}
-          - y.entries.each do |post|
+  - @feed_arr.each do |x|
+    %div{id: "sortable-#{@all_feeds.find_by(url: x[1]).id}-#{@all_feeds.find_by(url: x[1]).feed_order}"}
+      %h1{id: "toggle-#{x[1].parameterize}" }
+        = @all_feeds.find_by(url: x[1]).title
+        = link_to "Collapse", "#", id: "collapse-#{x[1].parameterize}"
+      - if @feed[x[1]].respond_to?(:entries)
+        %div{id: "content-#{x[1].parameterize}"}
+          - @feed[x[1]].entries.each do |post|
             = link_to(post.title, post.url) + " - #{post.published.strftime('%B %d, %Y at %I:%M %P')}"
             = simple_format post.summary
       - else

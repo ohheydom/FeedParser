@@ -1,5 +1,7 @@
 class Feed < ActiveRecord::Base
   before_create :invalid_url_test, :set_feed_order
+  validates :url, uniqueness: true, presence: true
+  validates :title, presence: true
 
 
   def set_feed_order
