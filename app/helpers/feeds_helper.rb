@@ -12,4 +12,12 @@ module FeedsHelper
     post.published.localtime.strftime('%B %d, %Y at %I:%M %P')
   end
 
+  def set_time_cookie
+    cookies.permanent[:last_viewed] = Time.now
+  end
+
+  def remove_non_digits(param)
+    param.map! {|num| num[/\d+-\d+/].split("-").map(&:to_i) }
+  end
+
 end

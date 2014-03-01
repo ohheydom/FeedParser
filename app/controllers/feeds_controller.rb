@@ -1,4 +1,7 @@
 class FeedsController < ApplicationController
+  include FeedsHelper
+
+  before_action :set_feed, only: [:edit, :update, :destroy]
   after_action :set_time_cookie, only: [:index]
 
   def index
@@ -7,26 +10,12 @@ class FeedsController < ApplicationController
                 .sort_by {|x| x[0] }
     @feed = Feedzirra::Feed.fetch_and_parse(@all_feeds.map(&:url))
   end
-  
-  def update_feed_order
-    new_sort_order = params[:sort_order].map! {|num| num[/\d+-\d+/].split("-").map(&:to_i) }
-    whenstring = "feed_order = CASE id"
-    new_sort_order.each_with_index { |arr, ind| whenstring << " WHEN #{arr[0]} THEN #{ind+1}" }
-    whenstring << " END"
-
-    Feed.where(id: new_sort_order.map { |arr| arr[0] }).update_all(whenstring)
-  end
 
   def show
-
   end
 
   def new
     @feed = Feed.new
-  end
-
-  def set_time_cookie
-    cookies.permanent[:last_viewed] = Time.now
   end
 
   def create
@@ -41,7 +30,6 @@ class FeedsController < ApplicationController
   end
 
   def update
-    @feed = Feed.find(params[:id])
     respond_to do |format|
       if @feed.update(feed_params)
         format.html { redirect_to root_url }
@@ -52,12 +40,22 @@ class FeedsController < ApplicationController
   end
 
   def edit
-    @feed = Feed.find(params[:id])
   end
 
   def destroy
-    @feed = Feed.find(params[:id]).destroy
+    @feed.destroy
     redirect_to root_url
+  end
+
+  def update_feed_order
+    whenstring = "feed_order = CASE id"
+    new_sort_order = remove_non_digits(params[:sort_order]).each_with_index { |arr, ind| whenstring << " WHEN #{arr[0]} THEN #{ind+1}" }
+    whenstring << " END"
+    Feed.where(id: new_sort_order.map { |arr| arr[0] }).update_all(whenstring)
+  end
+
+  def set_feed
+    @feed = Feed.find(params[:id])
   end
 
   private
