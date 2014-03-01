@@ -1,5 +1,6 @@
 class Feed < ActiveRecord::Base
   before_create :invalid_url_test, :set_feed_order
+  before_update :invalid_url_test
   validates :url, uniqueness: true, presence: true
   validates :title, presence: true
 
@@ -12,11 +13,15 @@ class Feed < ActiveRecord::Base
     uri = URI(self.url)
     request = Net::HTTP.new(uri.host, uri.port)
     begin
-    response = request.request_head(uri.path.empty? ? '/' : uri.path)
+      response = request.request_head(uri.path.empty? ? '/' : uri.path)
     rescue
+      errors.add(:url, "The url doesn't appear to be valid")
       return false
     end
-    return false unless response.code.to_i == 200
 
+    if response.code.to_i != 200
+      errors.add(:url, "The url doesn't appear to be valid")
+      return false
+    end
   end
 end

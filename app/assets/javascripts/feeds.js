@@ -6,7 +6,7 @@ var pageEvents = function(){
     
     if (changed == false) {
       $("#content-" + content).toggle();
-      $("#toggle-" + content + " a").toggleClass("sortable_collapse");
+      $("#toggle-" + content + " a:first").toggleClass("sortable_collapse");
     }
     
     event.preventDefault();

@@ -12,5 +12,12 @@
  *= require_tree .
  */
 
+$mets-blue: #002c77;
+$mets-orange: #fb4f14;
+
+$navbar-default-link-color: $mets-orange;
+$navbar-default-link-active-color: darken($mets-orange, 10);
+$navbar-default-link-hover-color: $mets-blue;
+
 @import 'bootstrap';
 @import 'font-awesome';

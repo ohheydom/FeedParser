@@ -1,0 +1,6 @@
+- if @feed.errors.any?
+  %div#error_explanation
+    %h2= "#{pluralize(@feed.errors.count, 'error')} prohibited the Feed from being saved."
+    %ul
+      - @feed.errors.full_messages.each do |msg|
+        %li= msg

@@ -1,0 +1,12 @@
+%div.row
+  %div.col-md-3.col-md-offset-3
+    = form_for @feed do |x|
+      = render 'error_messages'
+      %div.form-group
+        =x.label :title
+        =x.text_field :title, class: 'form-control'
+      %div.form-group
+        =x.label :url
+        =x.text_field :url, class: 'form-control'
+
+        =x.submit "Save", class: 'btn btn-default'

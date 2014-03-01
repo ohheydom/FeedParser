@@ -2,5 +2,6 @@
   %div.container-fluid
     %div.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li.active= link_to 'Feeds', root_path
-        %li.inactive= link_to 'Add New Feed', new_feed_path
+        %li{class: set_active[0] }= link_to 'Feeds', root_path
+        %li{class: set_active[1] }= link_to 'Add New Feed', new_feed_path
+        %li= link_to "Save Order", update_feed_order_path, id: 'save_order_button'

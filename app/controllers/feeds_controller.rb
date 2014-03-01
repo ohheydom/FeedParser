@@ -28,6 +28,7 @@ class FeedsController < ApplicationController
   def set_time_cookie
     cookies.permanent[:last_viewed] = Time.now
   end
+
   def create
     @feed = Feed.new(feed_params)
     respond_to do |format|
@@ -40,21 +41,28 @@ class FeedsController < ApplicationController
   end
 
   def update
-
+    @feed = Feed.find(params[:id])
+    respond_to do |format|
+      if @feed.update(feed_params)
+        format.html { redirect_to root_url }
+      else
+        format.html { render 'edit' }
+      end
+    end
   end
 
   def edit
-
+    @feed = Feed.find(params[:id])
   end
 
   def destroy
     @feed = Feed.find(params[:id]).destroy
     redirect_to root_url
-
   end
 
   private
   def feed_params
     params.require(:feed).permit(:title, :url)
   end
+
 end
