@@ -7,7 +7,7 @@ module ApplicationHelper
 
   def set_active
     arr = ['active', 'inactive']
-    action_name == 'new' ? arr.reverse : arr
+    action_name == 'new' ? arr.reverse << 'invisible' : arr << 'inactive'
   end
 
 end

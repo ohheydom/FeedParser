@@ -6,14 +6,26 @@
   font-weight: normal;
 }
 
-.sortable_expand:after {
-  font-family: 'FontAwesome';
-  content: '\f0de';
+.sortable_expand {
+  &:after {
+    padding-left: 20px;
+    font-family: 'FontAwesome';
+    content: '\f0de';
+  }
+  &:hover {
+    text-decoration: none;
+  }
 }
 
-.sortable_collapse:after {
-  font-family: 'FontAwesome';
-  content: '\f0dd';
+.sortable_collapse {
+  &:after {
+    padding-left: 20px;
+    font-family: 'FontAwesome';
+    content: '\f0dd';
+    }
+  &:hover {
+    text-decoration: none;
+    }
 }
 
 .content_hidden {

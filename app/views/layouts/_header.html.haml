@@ -4,4 +4,4 @@
       %ul.nav.navbar-nav
         %li{class: set_active[0] }= link_to 'Feeds', root_path
         %li{class: set_active[1] }= link_to 'Add New Feed', new_feed_path
-        %li= link_to "Save Order", update_feed_order_path, id: 'save_order_button'
+        %li{class: set_active[2] }= link_to "Save Order", update_feed_order_path, id: 'save_order_button'
