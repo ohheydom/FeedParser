@@ -19,6 +19,11 @@ describe Feed do
       bad_feed = Feed.new(url: 'http://www.badfeedblahblahblahblah.com', title: 'Bad Feed')
       expect{ bad_feed.save! }.to raise_error(ActiveRecord::RecordNotSaved)
     end
+
+    it "creates a feed with a redirect" do
+      feed_with_redirect = Feed.new(url: 'http://metsblog.com/feed', title: 'MetsBlog')
+      expect{ feed_with_redirect.save! }.to_not raise_error(ActiveRecord::RecordNotSaved)
+    end
   end
 
 end

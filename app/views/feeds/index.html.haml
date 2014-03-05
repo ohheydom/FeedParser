@@ -14,7 +14,7 @@
       - if @feed[x[1]].respond_to?(:entries)
         %div{id: "content-#{x[1].parameterize}", class: 'content_hidden' }
           - @feed[x[1]].entries.each do |post|
-            = link_to(post.title, post.url, class: bold_if_new(post)) + " - #{format_time(post)}"
+            %h3= link_to(post.title, post.url, class: bold_if_new(post)) + " - #{format_time(post)}"
             = simple_format post.summary
       - else
         %div{id: "content-#{x[1].parameterize}", class: 'content_hidden' }

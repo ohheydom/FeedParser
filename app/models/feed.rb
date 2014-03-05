@@ -19,7 +19,7 @@ class Feed < ActiveRecord::Base
       return false
     end
 
-    if response.code.to_i != 200
+    if response.code.to_i != 200 && response.code[0] != '3'
       errors.add(:url, "The url doesn't appear to be valid")
       return false
     end
