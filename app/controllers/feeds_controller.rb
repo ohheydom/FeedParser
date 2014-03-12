@@ -2,12 +2,13 @@ class FeedsController < ApplicationController
   include FeedsHelper
 
   before_action :set_feed, only: [:edit, :update, :destroy]
+  before_action :set_feed_array, only: [:index]
   after_action :set_time_cookie, only: [:index]
 
+  FeedMap = Struct.new(:feed_order, :url, :id, :title)
+  
+
   def index
-    @all_feeds = Feed.all.order(:feed_order)
-    @feed_arr = @all_feeds.map{|feed| [feed[:feed_order], feed[:url], feed[:id], feed[:title]] }
-                .sort_by {|x| x[0] }
     @feed = Feedzirra::Feed.fetch_and_parse(@all_feeds.map(&:url))
   end
 
@@ -45,6 +46,14 @@ class FeedsController < ApplicationController
   def destroy
     @feed.destroy
     redirect_to root_url
+  end
+
+  def set_feed_array
+    @all_feeds = Feed.all.order(:feed_order)
+    feed_array = @all_feeds.map{|feed| [feed[:feed_order], feed[:url], feed[:id], feed[:title]] }
+                .sort_by {|x| x[0] }
+
+    @feed_arr = feed_array.map { |feed| FeedMap.new(feed[0],feed[1], feed[2], feed[3]) }
   end
 
   def update_feed_order

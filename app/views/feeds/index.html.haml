@@ -1,22 +1,22 @@
 %div#sortable
-  - @feed_arr.each do |x|
-    %div{id: "sortable-#{x[2]}-#{x[0]}"}
-      %h1{id: "toggle-#{x[1].parameterize}" }
+  - @feed_arr.each do |feed|
+    %div{id: "sortable-#{feed.id}-#{feed.feed_order}"}
+      %h1{id: "toggle-#{feed.url.parameterize}" }
         %table.feed_header_table
           %tr
-            %td= link_to x[3], "#", id: "collapse-#{x[1].parameterize}", class: 'sortable_expand'
+            %td= link_to feed.title, "#", id: "collapse-#{feed.url.parameterize}", class: 'sortable_expand'
             %td
-              = link_to edit_feed_path(x[2]) do
+              = link_to edit_feed_path(feed.id) do
                 %i{ class: "fa fa-pencil-square-o"}
             %td
-              = link_to feed_path(x[2]), method: :delete, data: {confirm: "Are you sure?" } do
+              = link_to feed_path(feed.id), method: :delete, data: {confirm: "Are you sure?" } do
                 %i{ class: "fa fa-times"}
-      - if @feed[x[1]].respond_to?(:entries)
-        %div{id: "content-#{x[1].parameterize}", class: 'content_hidden' }
-          - @feed[x[1]].entries.each do |post|
+      - if @feed[feed.url].respond_to?(:entries)
+        %div{id: "content-#{feed.url.parameterize}", class: 'content_hidden' }
+          - @feed[feed.url].entries.each do |post|
             %h3= link_to(post.title, post.url, class: bold_if_new(post)) + " - #{format_time(post)}"
             = simple_format post.summary
       - else
-        %div{id: "content-#{x[1].parameterize}", class: 'content_hidden' }
+        %div{id: "content-#{feed.url.parameterize}", class: 'content_hidden' }
           This seems to be a bad feed.
-          = link_to 'Remove?', feed_path(x[2]), method: :delete
+          = link_to 'Remove?', feed_path(feed.id), method: :delete
