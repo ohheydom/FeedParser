@@ -11,5 +11,4 @@ describe FeedsController do
                                        [feed_two.feed_order, feed_two.url, feed_two.id, feed_two.title]])
     end
   end
-
 end
