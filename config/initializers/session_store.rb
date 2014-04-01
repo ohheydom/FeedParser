@@ -1,3 +1,3 @@
 # Be sure to restart your server when you modify this file.
 
-MetsFeed::Application.config.session_store :cookie_store, key: '_MetsFeed_session'
+FeedParser::Application.config.session_store :cookie_store, key: '_feedparser_session'

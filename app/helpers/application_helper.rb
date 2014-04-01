@@ -1,6 +1,6 @@
 module ApplicationHelper
   def full_title(page_title)
-    base_title = 'Mets Feed'
+    base_title = 'Feed Parser'
     page_title.empty? ? base_title : "#{base_title} | #{page_title}"
   end
 

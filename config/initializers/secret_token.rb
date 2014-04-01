@@ -9,4 +9,4 @@ def secure_token
   end
 end
 
-MetsFeed::Application.config.secret_key_base = secure_token
+FeedParser::Application.config.secret_key_base = secure_token

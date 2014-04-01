@@ -18,6 +18,7 @@ gem 'jquery-ui-rails', '~> 4.2.0'
 gem 'bootstrap-sass'
 
 gem 'turbolinks'
+gem 'rename'
 
 gem 'jbuilder', '~> 1.2'
 

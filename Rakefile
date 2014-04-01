@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-MetsFeed::Application.load_tasks
+FeedParser::Application.load_tasks
