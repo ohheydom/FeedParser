@@ -60,6 +60,7 @@ class FeedsController < ApplicationController
     new_sort_order = remove_non_digits(params[:sort_order]).each_with_index { |arr, ind| whenstring << " WHEN #{arr[0]} THEN #{ind+1}" }
     whenstring << " END"
     Feed.where(id: new_sort_order.map { |arr| arr[0] }).update_all(whenstring)
+    redirect_to root_path
   end
 
   def set_feed
