@@ -2,9 +2,9 @@ module FeedsHelper
   def bold_if_new(post)
     last_viewed_date = cookies[:last_viewed]
     if last_viewed_date
-      post.published.localtime > Time.parse(last_viewed_date) ? "title_bold" : "title_normal"
+      post.published.localtime > Time.parse(last_viewed_date) ? 'title_bold' : 'title_normal'
     else
-      "title_normal"
+      'title_normal'
     end
   end
 
@@ -17,6 +17,6 @@ module FeedsHelper
   end
 
   def remove_non_digits(param)
-    param.map! { |num| num[/\d+-\d+/].split("-").map(&:to_i) }
+    param.map! { |num| num[/\d+-\d+/].split('-').map(&:to_i) }
   end
 end

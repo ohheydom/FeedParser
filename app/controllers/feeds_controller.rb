@@ -49,16 +49,16 @@ class FeedsController < ApplicationController
 
   def set_feed_array
     @all_feeds = Feed.all.order(:feed_order)
-    feed_array = @all_feeds.map{|feed| [feed[:feed_order], feed[:url], feed[:id], feed[:title]] }
-                .sort_by {|x| x[0] }
+    feed_array = @all_feeds.map { |feed| [feed[:feed_order], feed[:url], feed[:id], feed[:title]] }
+                .sort_by { |x| x[0] }
 
-    @feed_arr = feed_array.map { |feed| FeedMap.new(feed[0],feed[1], feed[2], feed[3]) }
+    @feed_arr = feed_array.map { |feed| FeedMap.new(feed[0], feed[1], feed[2], feed[3]) }
   end
 
   def update_feed_order
-    whenstring = "feed_order = CASE id"
-    new_sort_order = remove_non_digits(params[:sort_order]).each_with_index { |arr, ind| whenstring << " WHEN #{arr[0]} THEN #{ind+1}" }
-    whenstring << " END"
+    whenstring = 'feed_order = CASE id'
+    new_sort_order = remove_non_digits(params[:sort_order]).each_with_index { |arr, ind| whenstring << " WHEN #{arr[0]} THEN #{ind + 1}" }
+    whenstring << ' END'
     Feed.where(id: new_sort_order.map { |arr| arr[0] }).update_all(whenstring)
     redirect_to root_path
   end

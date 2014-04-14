@@ -17,7 +17,12 @@ describe Feed do
   describe 'Invalid url tester' do
     it 'raises error with bad url' do
       bad_feed = Feed.new(url: 'http://www.badfeedblahblahblahblah.com', title: 'Bad Feed')
-      expect { bad_feed.save! }.to raise_error(ActiveRecord::RecordNotSaved)
+      expect { bad_feed.save! }.to raise_error(ActiveRecord::RecordInvalid)
+    end
+
+    it 'raises error with bad url' do
+      bad_feed = Feed.new(url: 'htsdfdsftp://www.badf\]]\]]eedblahbllahblah.com', title: 'Bad Feed')
+      expect { bad_feed.save! }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
     it 'creates a feed with a redirect' do
