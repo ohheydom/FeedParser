@@ -4,13 +4,9 @@
       %h1{id: "toggle-#{feed.url.parameterize}" }
         %table.feed_header_table
           %tr
-            %td= link_to feed.title, "#", id: "collapse-#{feed.url.parameterize}", class: 'sortable_expand'
-            %td
-              = link_to edit_feed_path(feed.id) do
-                %i{ class: "fa fa-pencil-square-o"}
-            %td
-              = link_to feed_path(feed.id), method: :delete, data: {confirm: "Are you sure?" } do
-                %i{ class: "fa fa-times"}
+            %td= feed.title_link
+            %td= feed.edit_link
+            %td= feed.delete_link
       - if @feed[feed.url].respond_to?(:entries)
         %div{id: "content-#{feed.url.parameterize}", class: 'content_hidden' }
           - @feed[feed.url].entries.each do |post|

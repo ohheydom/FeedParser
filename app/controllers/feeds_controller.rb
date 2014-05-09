@@ -52,7 +52,7 @@ class FeedsController < ApplicationController
     feed_array = @all_feeds.map { |feed| [feed[:feed_order], feed[:url], feed[:id], feed[:title]] }
                 .sort_by { |x| x[0] }
 
-    @feed_arr = feed_array.map { |feed| FeedMap.new(feed[0], feed[1], feed[2], feed[3]) }
+    @feed_arr = FeedDecorator.decorate_collection(feed_array.map { |feed| FeedMap.new(feed[0], feed[1], feed[2], feed[3]) })
   end
 
   def update_feed_order
