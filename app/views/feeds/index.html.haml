@@ -15,4 +15,4 @@
       - else
         %div{id: "content-#{feed.url.parameterize}", class: 'content_hidden' }
           This seems to be a bad feed.
-          = link_to 'Remove?', feed_path(feed.id), method: :delete
+          = feed.remove_bad_link

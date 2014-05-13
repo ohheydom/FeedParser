@@ -7,6 +7,10 @@ class FeedDecorator < Draper::Decorator
     end
   end
 
+  def remove_bad_link
+    h.link_to 'Remove?', h.feed_path(object.id), method: :delete
+  end
+
   def edit_link
     h.link_to h.edit_feed_path(object.id) do
       h.content_tag(:i, nil, class: 'fa fa-pencil-square-o')
