@@ -10,5 +10,6 @@ Bundler.require(:default, Rails.env)
 module FeedParser
   class Application < Rails::Application
     config.i18n.enforce_available_locales = false
+    config.autoload_paths += Dir["#{config.root}/lib/**"]
   end
 end
