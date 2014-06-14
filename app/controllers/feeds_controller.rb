@@ -8,7 +8,7 @@ class FeedsController < ApplicationController
   FeedMap = Struct.new(:feed_order, :url, :id, :title)
 
   def index
-    @feed = Feedzirra::Feed.fetch_and_parse(@all_feeds.map(&:url))
+    @feed = Feedzirra::Feed.fetch_and_parse(all_feeds.map(&:url))
   end
 
   def show
@@ -48,10 +48,8 @@ class FeedsController < ApplicationController
   end
 
   def set_feed_array
-    @all_feeds = Feed.all.order(:feed_order)
-    feed_array = @all_feeds.map { |feed| [feed[:feed_order], feed[:url], feed[:id], feed[:title]] }
+    feed_array = all_feeds.map { |feed| [feed[:feed_order], feed[:url], feed[:id], feed[:title]] }
                 .sort_by { |x| x[0] }
-
     @feed_arr = FeedDecorator.decorate_collection(feed_array.map { |feed| FeedMap.new(feed[0], feed[1], feed[2], feed[3]) })
   end
 
@@ -65,6 +63,10 @@ class FeedsController < ApplicationController
 
   def set_feed
     @feed = Feed.find(params[:id])
+  end
+
+  def all_feeds
+    Feed.all.order(:feed_order)
   end
 
   private
