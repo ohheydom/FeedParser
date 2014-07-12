@@ -13,6 +13,8 @@ gem 'turbolinks'
 gem 'rename'
 gem 'jbuilder', '~> 1.2'
 gem 'draper', '~> 1.3'
+gem 'haml-rails'
+gem 'feedzirra'
 
 group :doc do
   gem 'sdoc', require: false
@@ -24,6 +26,3 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
-gem 'haml-rails'
-
-gem 'feedzirra'
