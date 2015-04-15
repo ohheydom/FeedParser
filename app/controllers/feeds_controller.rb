@@ -8,7 +8,7 @@ class FeedsController < ApplicationController
   FeedMap = Struct.new(:feed_order, :url, :id, :title)
 
   def index
-    @feed = Feedzirra::Feed.fetch_and_parse(all_feeds.map(&:url))
+    @feed = Feedjira::Feed.fetch_and_parse(all_feeds.map(&:url))
   end
 
   def show

@@ -10,11 +10,11 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 4.2.0'
 gem 'bootstrap-sass'
 gem 'turbolinks'
-gem 'rename'
 gem 'jbuilder', '~> 1.2'
-gem 'draper', '~> 1.3'
+gem 'draper'
 gem 'haml-rails'
-gem 'feedzirra'
+gem 'feedjira'
+gem 'test-unit'
 
 group :doc do
   gem 'sdoc', require: false
@@ -25,4 +25,3 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
 end
-
