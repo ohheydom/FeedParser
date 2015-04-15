@@ -30,5 +30,4 @@ describe Feed do
       expect { feed_with_redirect.save! }.to_not raise_error
     end
   end
-
 end

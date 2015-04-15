@@ -2,7 +2,7 @@ class FeedDecorator < Draper::Decorator
   delegate_all
 
   def delete_link
-    h.link_to h.feed_path(object.id), method: :delete, data: {confirm: 'Are you sure?' } do
+    h.link_to h.feed_path(object.id), method: :delete, data: { confirm: 'Are you sure?' } do
       h.content_tag(:i, nil, class: 'fa fa-times')
     end
   end
