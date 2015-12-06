@@ -1,15 +1,15 @@
 #sortable {
   width: 80%;
 }
-.title_bold {
+.title-bold {
   font-weight: bold;
 }
 
-.title_normal {
+.title-normal {
   font-weight: normal;
 }
 
-.sortable_expand {
+.sortable-expand {
   &:after {
     padding-left: 20px;
     font-family: 'FontAwesome';
@@ -20,7 +20,7 @@
   }
 }
 
-.sortable_collapse {
+.sortable-collapse {
   &:after {
     padding-left: 20px;
     font-family: 'FontAwesome';
@@ -31,12 +31,12 @@
     }
 }
 
-.content_hidden {
+.content-hidden {
   display: none;
 }
 
 
-.feed_header_table tr td {
+.feed-header-table tr td {
   padding-left: 20px;
   padding-right: 20px;
 }

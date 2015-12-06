@@ -2,17 +2,17 @@
   - @feed_arr.each do |feed|
     %div{id: "sortable-#{feed.id}-#{feed.feed_order}"}
       %h1{id: "toggle-#{feed.url.parameterize}" }
-        %table.feed_header_table
+        %table.feed-header-table
           %tr
             %td= feed.title_link
             %td= feed.edit_link
             %td= feed.delete_link
       - if @feed[feed.url].respond_to?(:entries)
-        %div{id: "content-#{feed.url.parameterize}", class: 'content_hidden' }
+        %div{id: "content-#{feed.url.parameterize}", class: 'content-hidden' }
           - @feed[feed.url].entries.each do |post|
             %h3= link_to(post.title, post.url, class: bold_if_new(post)) + " - #{format_time(post)}"
             = simple_format post.summary
       - else
-        %div{id: "content-#{feed.url.parameterize}", class: 'content_hidden' }
+        %div{id: "content-#{feed.url.parameterize}", class: 'content-hidden' }
           This seems to be a bad feed.
           = feed.remove_bad_link

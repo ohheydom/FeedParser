@@ -2,9 +2,9 @@ module FeedsHelper
   def bold_if_new(post)
     last_viewed_date = cookies[:last_viewed]
     if last_viewed_date
-      post.published.localtime > Time.parse(last_viewed_date) ? 'title_bold' : 'title_normal'
+      post.published.localtime > Time.parse(last_viewed_date) ? 'title-bold' : 'title-normal'
     else
-      'title_normal'
+      'title-normal'
     end
   end
 

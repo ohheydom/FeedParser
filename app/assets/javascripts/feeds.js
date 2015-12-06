@@ -6,7 +6,7 @@ var pageEvents = function(){
     
     if (changed == false) {
       $("#content-" + content).toggle();
-      $("#toggle-" + content + " a:first").toggleClass("sortable_collapse");
+      $("#toggle-" + content + " a:first").toggleClass("sortable-collapse");
     }
     
     event.preventDefault();
@@ -15,7 +15,7 @@ var pageEvents = function(){
 
   $('#sortable').sortable( { axis: 'y', sort: function( event, ui ) { changed = true; }}).disableSelection();
 
-  $('#save_order_button').click(function(event) {
+  $('#save-order-button').click(function(event) {
     var sortable_params = $('#sortable').sortable( "serialize", {key: "sortable" });
     $.ajax({
       url: '/update_feed_order',

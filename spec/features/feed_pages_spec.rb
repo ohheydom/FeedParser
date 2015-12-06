@@ -42,14 +42,14 @@ describe 'Feed Pages' do
       fill_in 'Title', with: 'Amazin Avenue'
       fill_in 'Url', with: 'http://www.amazinavenue.com/rss/current'
       click_button 'Save'
-      expect(page).to_not have_css '#error_explanation'
+      expect(page).to_not have_css '#error-explanation'
       expect(page).to_not have_title 'Edit Feed'
     end
 
     it "doesn't update the feed with an invalid url" do
       fill_in 'Url', with: 'http://www.blahblahinvalidurlblah.com'
       click_button 'Save'
-      expect(page).to have_css '#error_explanation'
+      expect(page).to have_css '#error-explanation'
     end
   end
 end
